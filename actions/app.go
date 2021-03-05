@@ -12,10 +12,13 @@ import (
 	"github.com/gobuffalo/packr/v2"
 )
 
-// ENV is used to help switch settings based on where the
 // application is being run. Default is "development".
+
+// ENV is used to help switch settings based on where the
 var ENV = envy.Get("GO_ENV", "development")
 var app *buffalo.App
+
+// T Translator
 var T *i18n.Translator
 
 // App is where all routes and middleware for buffalo
@@ -57,6 +60,7 @@ func App() *buffalo.App {
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
+		app.GET("/about", AboutHandler)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
